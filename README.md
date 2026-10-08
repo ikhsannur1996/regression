@@ -3,6 +3,7 @@
 Proyek regresi perbankan dari notebook sampai API: **Automated Valuation Model (AVM)** yang menaksir nilai wajar rumah/townhouse/ruko yang dijadikan agunan KPR, lengkap dengan **interval prediksi 90%** dan **plafon maksimum berdasarkan LTV**. Dua model dibandingkan (**Ridge** vs **Gradient Boosting**). Model terbaik disimpan sebagai **JSON**, disajikan lewat **FastAPI**, dan dijalankan di **Docker lokal**.
 
 **Highlight:**
+- **Model statistik** sebelum cross-validation: OLS hedonik log-harga dengan intercept, koefisien, p-value, elastisitas, VIF/GVIF, dan diagnostik asumsi
 - 10.000 transaksi properti (Jan 2022 – Des 2025) di 10 kota, 16 fitur. Target: **log(harga)**, sehingga error dibaca dalam persen
 - **Binning** umur bangunan (baru/6–15/16–30/tua) & lebar jalan (gang/sedang/lebar) dan **one-hot** kota/tipe/sertifikat di dalam pipeline
 - **Penyesuaian tren harga** (`TrendAdjustedRegressor`): mencegah undervaluasi sistematis karena model pohon tidak bisa mengekstrapolasi waktu
@@ -81,6 +82,7 @@ Isi notebook (20 bagian; setiap cell kode didahului kotak **Alur data: Input →
 | 4 | **Uji statistik fitur**: Spearman, Kruskal-Wallis + ε², VIF (koreksi Holm) |
 | 5–6 | Split waktu (dev/OOT) + split acak (train/test), pipeline binning + one-hot + log + scaling, telusuri 1 properti |
 | 7 | 2 model + **penyesuaian tren**, dengan mini-backtest yang membuktikan bias ekstrapolasi |
+| **7.1** | **Model statistik (sebelum cross-validation)**: dummy coding, rank + **VIF/GVIF** (pembuangan iteratif), **OLS log-harga** dengan SE robust HC3: **intercept** (harga properti acuan), **koefisien, p-value (Holm), CI 95%**, efek % / **elastisitas** / **apresiasi tahunan + CI**, R²/adj-R², uji Wald per fitur, diagnostik **RESET**, Breusch-Pagan, Jarque-Bera, Cook's distance |
 | 8–10 | GridSearchCV, **repeated K-fold 5×5** + corrected t-test + Wilcoxon, learning curve, pemilihan model |
 | 11 | **Interval prediksi conformal** dari residual out-of-fold |
 | 12 | Evaluasi test: 10 metrik, **bootstrap CI**, **Diebold-Mariano & Wilcoxon**, cakupan interval, grafik akurasi |
