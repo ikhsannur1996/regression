@@ -1,0 +1,11 @@
+services:
+  api:
+    build: .
+    image: property-valuation-api:latest
+    container_name: property-valuation-api
+    ports:
+      - "8002:8000"   # 8000 = credit default, 8001 = segmentasi, 8002 = valuasi properti
+    environment:
+      - LOG_LEVEL=INFO
+      - MAX_EXTRAPOLATION_MONTHS=6
+    restart: unless-stopped

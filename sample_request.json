@@ -1,0 +1,21 @@
+{
+  "property_id": "P003615",
+  "building_age": 8.0,
+  "road_width_m": 9.6,
+  "land_area": 77.0,
+  "building_area": 115.0,
+  "distance_to_cbd_km": 26.5,
+  "floors": 2,
+  "bedrooms": 1,
+  "bathrooms": 1,
+  "carport": 0,
+  "near_toll": false,
+  "near_transit": false,
+  "flood_prone": false,
+  "condition": "baik",
+  "city": "bogor",
+  "property_type": "ruko",
+  "certificate": "HGB",
+  "valuation_date": "2025-07-18",
+  "loan_amount": 506.2
+}
